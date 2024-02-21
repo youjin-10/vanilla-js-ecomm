@@ -78,11 +78,15 @@ async function main() {
     }
   });
 
-  document.querySelector(".btn-cart").addEventListener("click", (_) => {
+  document.querySelector(".btn-cart").addEventListener("click", () => {
     document.body.classList.add("displaying-cart");
   });
 
-  document.querySelector(".btn-close-cart").addEventListener("click", (_) => {
+  document.querySelector(".btn-close-cart").addEventListener("click", () => {
+    document.body.classList.remove("displaying-cart");
+  });
+
+  document.querySelector(".cart-dimmed-bg").addEventListener("click", (_) => {
     document.body.classList.remove("displaying-cart");
   });
 }

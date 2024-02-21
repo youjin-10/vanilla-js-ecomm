@@ -7,7 +7,7 @@
     <title>Vite App</title>
   </head>
   <body>
-    <div class="bg-gray-400 container mx-auto py-4 px-8 relative">
+    <div class="bg-yellow-50 container mx-auto py-4 px-8 relative">
       <nav class="flex items-center justify-between">
         <h1 class="text-3xl font-bold">
           <span
@@ -16,7 +16,9 @@
             my store!
           </span>
         </h1>
-        <button class="text-green-900 hover:bg-green-200 px-3 py-1 rounded-md">
+        <button
+          class="btn-cart text-green-900 hover:bg-green-200 px-3 py-1 rounded-md"
+        >
           <span>Cart</span>
           <span class="total-count">(0)</span>
         </button>
@@ -24,16 +26,16 @@
 
       <div id="products" class="mt-8 grid grid-cols-2 gap-4"></div>
 
-      <div class="hidden cart-layer fixed top-0 right-0 bottom-0 left-0">
+      <div class="cart-layer fixed top-0 right-0 bottom-0 left-0">
         <div
           class="fixed left-0 top-0 bottom-0 w-1/2 bg-black opacity-30"
         ></div>
         <div class="fixed right-0 top-0 bottom-0 w-1/2 bg-white py-2 px-4">
           <div class="flex justify-end">
             <button
-              class="text-green-800 bg-green100 hover:bg-green-200 rounded-md px-2 py-1"
+              class="btn-close-cart text-green-800 bg-green100 hover:bg-green-200 rounded-md px-2 py-1"
             >
-              close
+              Close
             </button>
           </div>
 

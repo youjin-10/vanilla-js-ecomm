@@ -77,6 +77,14 @@ async function main() {
       document.querySelector(".total-count").innerHTML = `(${totalCount})`;
     }
   });
+
+  document.querySelector(".btn-cart").addEventListener("click", (_) => {
+    document.body.classList.add("displaying-cart");
+  });
+
+  document.querySelector(".btn-close-cart").addEventListener("click", (_) => {
+    document.body.classList.remove("displaying-cart");
+  });
 }
 
 main();

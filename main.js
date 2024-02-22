@@ -52,6 +52,46 @@ async function main() {
   });
   const countMap = {};
 
+  const updateProductCount = (productId) => {
+    const productElem = document.querySelector(
+      `.product[data-product-id='${productId}']`,
+    );
+    productElem.querySelector(".cart-count").innerHTML = countMap[productId];
+  };
+
+  const updateCart = () => {
+    const productIds = Object.keys(countMap);
+    document.querySelector(".cart-items").innerHTML = productIds
+      .map((productId) => {
+        const productInCart = productMap[productId];
+        const productCount = countMap[productId];
+        return productCount > 0
+          ? getProductHTML(productInCart, productCount)
+          : "";
+      })
+      .join("");
+
+    const totalCount = sumTotalCount(Object.values(countMap));
+    document.querySelector(".total-count").innerHTML = `(${totalCount})`;
+  };
+
+  const decreaseCount = (productId) => {
+    if (!countMap[productId]) {
+      countMap[productId] = 0;
+    }
+    countMap[productId] -= 1;
+    updateProductCount(productId);
+    updateCart();
+  };
+  const increaseCount = (productId) => {
+    if (!countMap[productId]) {
+      countMap[productId] = 0;
+    }
+    countMap[productId] += 1;
+    updateProductCount(productId);
+    updateCart();
+  };
+
   document.querySelector("#products").innerHTML = products
     .map((product) => {
       return getProductHTML(product);
@@ -68,33 +108,11 @@ async function main() {
       const foundProductElem = findElement(targetElem, ".product");
       const productId = foundProductElem.getAttribute("data-product-id");
 
-      if (!countMap[productId]) {
-        countMap[productId] = 0;
-      }
-
       if (targetElem.matches(".btn-decrease") && countMap[productId] > 0) {
-        countMap[productId] -= 1;
+        decreaseCount(productId);
       } else if (targetElem.matches(".btn-increase")) {
-        countMap[productId] += 1;
+        increaseCount(productId);
       }
-
-      foundProductElem.querySelector(".cart-count").innerHTML =
-        countMap[productId];
-
-      const productIds = Object.keys(countMap);
-      const htmls = productIds
-        .map((productId) => {
-          const productInCart = productMap[productId];
-          const productCount = countMap[productId];
-          return productCount > 0
-            ? getProductHTML(productInCart, productCount)
-            : "";
-        })
-        .join("");
-      document.querySelector(".cart-items").innerHTML = `<p>${htmls}</p>`;
-
-      const totalCount = sumTotalCount(Object.values(countMap));
-      document.querySelector(".total-count").innerHTML = `(${totalCount})`;
     }
   });
 

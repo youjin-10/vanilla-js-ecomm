@@ -116,6 +116,24 @@ async function main() {
     }
   });
 
+  document.querySelector(".cart-items").addEventListener("click", () => {
+    const targetElem = event.target;
+
+    if (
+      targetElem.matches(".btn-decrease") ||
+      targetElem.matches(".btn-increase")
+    ) {
+      const foundProductElem = findElement(targetElem, ".product");
+      const productId = foundProductElem.getAttribute("data-product-id");
+
+      if (targetElem.matches(".btn-decrease") && countMap[productId] > 0) {
+        decreaseCount(productId);
+      } else if (targetElem.matches(".btn-increase")) {
+        increaseCount(productId);
+      }
+    }
+  });
+
   document.querySelector(".btn-cart").addEventListener("click", () => {
     document.body.classList.add("displaying-cart");
   });

@@ -6,6 +6,10 @@
   display: none;
 }
 
+.displaying-cart {
+  overflow-y: hidden;
+}
+
 .displaying-cart .cart-layer {
   display: block;
 }
